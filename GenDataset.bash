@@ -27,14 +27,14 @@ do
     if [[ $QP -eq 0 ]]
     then
         echo "Extracting RAW frames from $vid_name..."
-        ffmpeg -i $vid ${Dir_dest}/RAW540/train/${vid_name}_%04d.png 2>&-
+        ffmpeg -i $vid ${Dir_dest}/RAW540/train/${vid_name}_%04d.png #2>&-
     else
-        dest_vid=${Dir_temp}/${vid_name}.mp4
+        dest_vid=${Dir_temp}/${vid_name}.mov
         echo "converting $vid_name_ext with QP=$QP..."
-        ffmpeg -i $vid -c:v libx264 -qp $QP -pix_fmt yuv420p -y $dest_vid 2>&-
+        ffmpeg -i $vid -c:v libx264 -qp $QP -pix_fmt yuv420p -y -strict -2 $dest_vid #2>&-
         echo "Extracting frames from $vid_name with QP=$QP..."
-        ffmpeg -i $dest_vid ${Dir_dest}/QP${QP}/train/${vid_name}_%04d.png 2>&-
-        rm dest_vid
+        ffmpeg -i $dest_vid ${Dir_dest}/QP${QP}/train/${vid_name}_%04d.png #2>&-
+        rm $dest_vid
     fi
 done
 
@@ -47,14 +47,14 @@ do
     if [[ $QP -eq 0 ]]
     then
         echo "Extracting RAW frames from $vid_name..."
-        ffmpeg -i $vid ${Dir_dest}/RAW540/test/${vid_name}_%04d.png 2>&-
+        ffmpeg -i $vid ${Dir_dest}/RAW540/test/${vid_name}_%04d.png #2>&-
     else
-        dest_vid=${Dir_temp}/${vid_name}.mp4
-        echo "converting $vid_name_ext with QP=$QP..."
-        ffmpeg -i $vid -c:v libx264 -qp $QP -pix_fmt yuv420p -y $dest_vid 2>&-
+        dest_vid=${Dir_temp}/${vid_name}.mov
+        echo "converting $vid with QP=$QP..."
+        ffmpeg -i $vid -c:v libx264 -qp $QP -pix_fmt yuv420p -y -strict -2 $dest_vid #2>&-
         echo "Extracting frames from $vid_name with QP=$QP..."
-        ffmpeg -i $dest_vid ${Dir_dest}/QP${QP}/test/${vid_name}_%04d.png 2>&-
-        rm dest_vid
+        ffmpeg -i $dest_vid ${Dir_dest}/QP${QP}/test/${vid_name}_%04d.png #2>&-
+        rm $dest_vid
     fi
 done
 
