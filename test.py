@@ -55,7 +55,7 @@ if __name__ == "__main__":
                         help='Path for input images N resolution')
 
     parser.add_argument('-ilr', '--input_noNoise', action='store', dest='input_LR',
-                        default='./RAW/',
+                        default=None,
                         help='Path for input images L resolution')
 
     parser.add_argument('-o', '--output_dir', action='store', dest='output_dir', default='./SR/',
@@ -85,6 +85,9 @@ if __name__ == "__main__":
     newModel = Model(newInput, newOutputs)
 
     newModel.summary()
+
+    if values.input_LR is None:
+        values.input_LR = values.input_NR
 
     test_model_for_lr_images(NR_dir=values.input_NR, LR_dir=values.input_LR, model=newModel,
                              output_dir=values.output_dir, stride=3)
