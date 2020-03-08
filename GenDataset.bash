@@ -34,7 +34,7 @@ do
         ffmpeg -i $vid -c:v libx264 -qp $QP -pix_fmt yuv420p -y $dest_vid 2>&-
         echo "Extracting frames from $vid_name with QP=$QP..."
         ffmpeg -i $dest_vid ${Dir_dest}/QP${QP}/train/${vid_name}_%04d.png 2>&-
-        rm dest_vid
+        rm $dest_vid
     fi
 done
 

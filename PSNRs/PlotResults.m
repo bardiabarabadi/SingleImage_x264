@@ -39,12 +39,13 @@ to_show_data (found_zeros,:,:)=[];
 to_show_data_mean(:,ENH)=inpaint_nans(to_show_data_mean(:,ENH));
 to_show_data_mean(:,RAW)=inpaint_nans(to_show_data_mean(:,RAW));
 
+lim_x=[1,49];
 
 close all
 figure
 subplot(3,2,1)
 bar(to_show_data_mean(:,ENH)-to_show_data_mean(:,RAW),'b')
-xlim([29,49])
+xlim(lim_x)
 title ('Mean PSNR imporvement')
 xlabel ('QP')
 ylabel ('PSNR_{Enhanced}-PSNR_{RAW}')
@@ -52,22 +53,22 @@ ylabel ('PSNR_{Enhanced}-PSNR_{RAW}')
 subplot(3,2,2)
 bar(to_show_data_std)
 legend('Enhanced', 'RAW');
-xlim([29,49])
+xlim(lim_x)
 ylim([0.5 1.5])
 title ('Standard Deviation PSNR')
 xlabel ('QP')
 ylabel ('STD')
 
 subplot(3,2,3)
-hist(to_show_data(:,30,ENH),20)
+hist(to_show_data(:,26,ENH),20)
 xlim([28,42])
-title ('Enhanced PSNR Distribution for QP=30')
+title ('Enhanced PSNR Distribution for QP=26')
 xlabel ('PSNR')
 
 subplot(3,2,5)
-hist(to_show_data(:,30,RAW),20)
+hist(to_show_data(:,26,RAW),20)
 xlim([28,42])
-title ('RAW PSNR Distribution for QP=30')
+title ('RAW PSNR Distribution for QP=26')
 xlabel ('PSNR')
 
 
